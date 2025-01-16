@@ -1,0 +1,15 @@
+FROM node:23 AS build
+
+COPY frontend/ /frontend/
+
+WORKDIR /frontend/
+
+RUN  echo "VITE_API_PATH=http://localhost:8080" > .env && npm install eslint@^9.10.0 --save-dev && npm run build
+
+FROM nginx:alpine
+
+COPY --from=build /frontend/dist /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
