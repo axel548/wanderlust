@@ -1,0 +1,40 @@
+frontend/node_modules
+frontend/.env.local
+backend/.env
+backend/node_modules
+/node_modules
+coverage/
+.idea/
+backend/dist
+package-lock.json
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+
+# Crash log files
+crash.log
+
+# Override files
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# CLI configuration files
+.terraformrc
+terraform.rc
+
+# Local .terraform directories
+.terraform/
+
+
+
+
+
+
+*.csv
+AWS.md
+*.localstack.yml
