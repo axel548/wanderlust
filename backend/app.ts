@@ -16,6 +16,26 @@ app.use(
   cors({
     // added origin
     origin: [FRONTEND_URL as string, 'http://localhost:3000'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    // allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    allowedHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Accept',
+      'Origin',
+      'Referer',
+      'If-None-Match',
+      'X-Requested-With',
+      'Sec-CH-UA',
+      'Sec-CH-UA-Mobile',
+      'Sec-CH-UA-Platform',
+      'Sec-Fetch-Dest',
+      'Sec-Fetch-Mode',
+      'Sec-Fetch-Site',
+      'Sec-GPC',
+      'User-Agent',
+    ],
+    // exposedHeaders: ['Authorization'],
     credentials: true,
   })
 );
