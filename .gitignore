@@ -8,6 +8,8 @@ coverage/
 backend/dist
 package-lock.json
 
+*.txt
+
 # Terraform
 *.tfstate
 *.tfstate.backup
@@ -38,3 +40,14 @@ terraform.rc
 *.csv
 AWS.md
 *.localstack.yml
+
+
+frontend/node_modules
+frontend/.env.local
+backend/.env
+backend/node_modules
+/node_modules
+coverage/
+.idea/
+backend/dist
+package-lock.json

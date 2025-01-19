@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: wanderlust-config
+  namespace: wanderlustdevops
+data:
+  NODE_ENV: Development
+  ACCESS_COOKIE_MAXAGE: "120000"
+  ACCESS_TOKEN_EXPIRES_IN: "120s"
+  REFRESH_COOKIE_MAXAGE: "120000"
+  REFRESH_TOKEN_EXPIRES_IN: "120s"
+  REDIS_URL: redis://127.0.0.1:6379
+  FRONTEND_URL: http://localhost:3000/
+  BACKEND_URL: http://localhost:5000/
