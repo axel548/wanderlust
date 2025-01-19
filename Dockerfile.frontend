@@ -4,7 +4,7 @@ COPY frontend/ /frontend/
 
 WORKDIR /frontend/
 
-RUN  echo "VITE_API_PATH=http://localhost:8080" > .env && npm install eslint@^9.10.0 --save-dev && npm run build
+RUN  echo "VITE_API_PATH=http://localhost:5000" > .env && npm install eslint@^9.10.0 --save-dev && npm run build
 
 FROM nginx:alpine
 
