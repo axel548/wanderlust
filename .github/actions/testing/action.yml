@@ -2,6 +2,7 @@ name: "Testing"
 description: "Test Frontend and Backend"
 
 runs:
+  using: "composite"
   steps:
     - name: Checkout code
       uses: actions/checkout@v4.1.7
