@@ -1,0 +1,24 @@
+name: "Testing"
+description: "Test Frontend and Backend"
+
+runs:
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v4.1.7
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: "22"
+
+    - name: Run tests for Frontend
+      working-directory: frontend
+      run: |
+        npm install
+        npm run test
+
+    - name: Run tests for Backend
+      working-directory: backend
+      run: |
+        npm install
+        npm run test

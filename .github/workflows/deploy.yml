@@ -1,0 +1,14 @@
+name: CI/CD Pipeline
+
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    testing:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Testing
+            uses: ./.github/actions/testing
