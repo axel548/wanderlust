@@ -24,4 +24,4 @@ jobs:
           uses: actions/checkout@v4.1.7
           
         - name: Build and Push Image to Docker Hub
-          uses: ./.github/actions/testing
+          uses: ./.github/actions/build
