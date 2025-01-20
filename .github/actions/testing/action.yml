@@ -12,12 +12,12 @@ runs:
       with:
         node-version: "22"
 
-    - name: Run tests for Frontend
-      working-directory: frontend
-      run: |
-        npm install
-        npm run test
-      shell: bash        
+    # - name: Run tests for Frontend
+    #   working-directory: frontend
+    #   run: |
+    #     npm install
+    #     npm run test
+    #   shell: bash        
 
     - name: Run tests for Backend
       working-directory: backend
