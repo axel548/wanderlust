@@ -32,7 +32,7 @@ runs:
           password: ${{ inputs.password }}
 
       - name: FRONTEND - Build the Docker image
-        run:  docker build --no-cache -f Dockerfile.frontend -t ${{ env.IMAGE_NAME_FRONTEND }}
+        run:  docker build --no-cache -f Dockerfile.frontend -t ${{ env.IMAGE_NAME_FRONTEND }} .
         shell: bash
 
       - name: FRONTEND - Tag the Docker image
@@ -44,7 +44,7 @@ runs:
         shell: bash
 
       - name: BACKEND - Build the Docker image
-        run:  docker build --no-cache -f Dockerfile.backend -t ${{ env.IMAGE_NAME_BACKEND }}
+        run:  docker build --no-cache -f Dockerfile.backend -t ${{ env.IMAGE_NAME_BACKEND }} .
         shell: bash
 
       - name: BACKEND - Tag the Docker image
