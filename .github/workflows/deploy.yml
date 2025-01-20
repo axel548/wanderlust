@@ -11,4 +11,4 @@ jobs:
 
         steps:
           - name: Testing
-            uses: ./.github/actions/testing
+            uses: ./.github/actions/testing/action.yml
