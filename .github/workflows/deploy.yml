@@ -10,5 +10,8 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
+          - name: Checkout code
+            uses: actions/checkout@v4.1.7
+            
           - name: Testing
             uses: ./.github/actions/testing
