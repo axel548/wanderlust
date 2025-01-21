@@ -8,6 +8,9 @@ inputs:
   password:
     description: "docker pwd"
     required: true
+  version:
+    description: "version"
+    required: true
 
 runs:
     using: "composite"
@@ -15,11 +18,11 @@ runs:
       - name: Set environment variables
         run: |
           echo "REGISTRY=axe548/wanderlustdevops" >> $GITHUB_ENV
-          echo "VERSION=${{ github.sha }}" >> $GITHUB_ENV
+          echo "VERSION=${{ inputs.version }}" >> $GITHUB_ENV
           echo "IMAGE_NAME_FRONTEND=wanderlust_frontend" >> $GITHUB_ENV
-          echo "IMAGE_NAME_FRONTEND_VERSION=${{ env.REGISTRY }}:${{ env.IMAGE_NAME_FRONTEND }}-${{ env.VERSION }}" >> $GITHUB_ENV
+          echo "IMAGE_NAME_FRONTEND_VERSION=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_FRONTEND }}:${{ env.VERSION }}" >> $GITHUB_ENV
           echo "IMAGE_NAME_BACKEND=wanderlust_backend" >> $GITHUB_ENV
-          echo "IMAGE_NAME_BACKEND_VERSION=${{ env.REGISTRY }}:${{ env.IMAGE_NAME_BACKEND }}-${{ env.VERSION }}" >> $GITHUB_ENV
+          echo "IMAGE_NAME_BACKEND_VERSION=${{ env.REGISTRY }}/${{ env.IMAGE_NAME_BACKEND }}:${{ env.VERSION }}" >> $GITHUB_ENV
         shell: bash
 
       - name: Check out the repo
@@ -32,11 +35,11 @@ runs:
           password: ${{ inputs.password }}
 
       - name: FRONTEND - Build the Docker image
-        run:  docker build --no-cache -f Dockerfile.frontend -t ${{ env.IMAGE_NAME_FRONTEND }} .
+        run: docker build --no-cache -f Dockerfile.frontend -t ${{ env.IMAGE_NAME_FRONTEND }} .
         shell: bash
 
       - name: FRONTEND - Tag the Docker image
-        run:  docker tag ${{ env.IMAGE_NAME_FRONTEND }} ${{ env.IMAGE_NAME_FRONTEND_VERSION }}
+        run: docker tag ${{ env.IMAGE_NAME_FRONTEND }} ${{ env.IMAGE_NAME_FRONTEND_VERSION }}
         shell: bash
 
       - name: FRONTEND - Push Docker image to Docker Hub
