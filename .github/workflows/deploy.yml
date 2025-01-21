@@ -52,5 +52,9 @@ jobs:
         - name: K8s
           uses: ./.github/actions/k8s
           with:
-            aws_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            aws_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws_id: ${{ secrets.AWS_ACCESS_KEY_ID_ADMIN_EKS }}
+            aws_key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ADMIN_EKS }}
+            jwt_name: ${{ secrets.JWT_NAME }}
+            db_uri: ${{ secrets.MONGODBSECRET }}
+            google_client_id: ${{ secrets.GOOGLECLIENTID }}
+            google_client_secret: ${{ secrets.GOOGLECLIENTSECRET }}
