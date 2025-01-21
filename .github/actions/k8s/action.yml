@@ -43,25 +43,30 @@ runs:
         kubectl apply -f k8s/namespace.yaml
         kubectl apply -f k8s/configmap.yaml
 
-            jwt_name='jwt-secret'
-            db_uri='mongodb-secret'
-            google_client_id='googleclientid-secret'
-            google_client_secret='googleclientsecret-secret'
+        jwt_name='jwt-secret'
+        db_uri='mongodb-secret'
+        google_client_id='googleclientid-secret'
+        google_client_secret='googleclientsecret-secret'
 
-            rm ./$jwt_name.txt
-            rm ./$db_uri.txt
-            rm ./$google_client_id.txt
-            rm ./$google_client_secret.txt
-            echo ${{ inputs.jwt_name }} > ./$jwt_name.txt
-            echo ${{ inputs.db_uri }} > ./$db_uri.txt
-            echo ${{ inputs.google_client_id }} > ./$google_client_id.txt
-            echo ${{ inputs.jwt_name }} > ./$google_client_secret.txt
+        # Verificar si los archivos existen antes de eliminarlos
+        [ -f ./$jwt_name.txt ] && rm ./$jwt_name.txt
+        [ -f ./$db_uri.txt ] && rm ./$db_uri.txt
+        [ -f ./$google_client_id.txt ] && rm ./$google_client_id.txt
+        [ -f ./$google_client_secret.txt ] && rm ./$google_client_secret.txt
 
-            kubectl create secret generic $jwt_name --from-file=./$jwt_name.txt  -n wanderlustdevops
-            kubectl create secret generic $db_uri --from-file=./$db_uri.txt -n wanderlustdevops
-            kubectl create secret generic $google_client_id --from-file=./$google_client_id.txt  -n wanderlustdevops
-            kubectl create secret generic $google_client_secret --from-file=./$google_client_secret.txt -n wanderlustdevops
+        # Crear los archivos de nuevo
+        echo ${{ inputs.jwt_name }} > ./$jwt_name.txt
+        echo ${{ inputs.db_uri }} > ./$db_uri.txt
+        echo ${{ inputs.google_client_id }} > ./$google_client_id.txt
+        echo ${{ inputs.google_client_secret }} > ./$google_client_secret.txt
 
+        # Crear o actualizar los secretos en Kubernetes
+        kubectl create secret generic $jwt_name --from-file=./$jwt_name.txt -n wanderlustdevops || kubectl apply -f ./$jwt_name.txt
+        kubectl create secret generic $db_uri --from-file=./$db_uri.txt -n wanderlustdevops || kubectl apply -f ./$db_uri.txt
+        kubectl create secret generic $google_client_id --from-file=./$google_client_id.txt -n wanderlustdevops || kubectl apply -f ./$google_client_id.txt
+        kubectl create secret generic $google_client_secret --from-file=./$google_client_secret.txt -n wanderlustdevops || kubectl apply -f ./$google_client_secret.txt
+
+        # Aplicar los despliegues y servicios
         kubectl apply -f k8s/deployments/
         kubectl apply -f k8s/services/
       shell: bash
