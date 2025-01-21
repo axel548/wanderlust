@@ -48,6 +48,18 @@ runs:
         google_client_id='googleclientid-secret'
         google_client_secret='googleclientsecret-secret'
 
+        # Verificar si los archivos existen antes de eliminarlos
+        [ -f ./$jwt_name.txt ] && rm ./$jwt_name.txt
+        [ -f ./$db_uri.txt ] && rm ./$db_uri.txt
+        [ -f ./$google_client_id.txt ] && rm ./$google_client_id.txt
+        [ -f ./$google_client_secret.txt ] && rm ./$google_client_secret.txt
+
+        # Crear los archivos de nuevo
+        echo ${{ inputs.jwt_name }} > ./$jwt_name.txt
+        echo ${{ inputs.db_uri }} > ./$db_uri.txt
+        echo ${{ inputs.google_client_id }} > ./$google_client_id.txt
+        echo ${{ inputs.google_client_secret }} > ./$google_client_secret.txt
+
         # Crear o actualizar los secretos en Kubernetes
         kubectl create secret generic $jwt_name --from-file=./$jwt_name.txt -n wanderlustdevops || kubectl apply -f ./$jwt_name.txt
         kubectl create secret generic $db_uri --from-file=./$db_uri.txt -n wanderlustdevops || kubectl apply -f ./$db_uri.txt
