@@ -8,6 +8,9 @@ inputs:
   password:
     description: "docker pwd"
     required: true
+  version:
+    description: "version"
+    required: true
 
 runs:
     using: "composite"
@@ -15,7 +18,7 @@ runs:
       - name: Set environment variables
         run: |
           echo "REGISTRY=axe548/wanderlustdevops" >> $GITHUB_ENV
-          echo "VERSION=${{ github.sha }}" >> $GITHUB_ENV
+          echo "VERSION=${{ inputs.version }}" >> $GITHUB_ENV
           echo "IMAGE_NAME_FRONTEND=wanderlust_frontend" >> $GITHUB_ENV
           echo "IMAGE_NAME_FRONTEND_VERSION=${{ env.REGISTRY }}:${{ env.IMAGE_NAME_FRONTEND }}-${{ env.VERSION }}" >> $GITHUB_ENV
           echo "IMAGE_NAME_BACKEND=wanderlust_backend" >> $GITHUB_ENV
