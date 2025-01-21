@@ -28,3 +28,16 @@ jobs:
           with:
               username: ${{ secrets.DOCKER_USERNAME }}
               password: ${{ secrets.DOCKER_PASSWORD }}
+
+    iac:
+      runs-on: ubuntu-latest
+      # needs: [image_build]
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4.1.7
+          
+        - name: Infrastructure
+          uses: ./.github/actions/iac
+          with:
+            aws_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
