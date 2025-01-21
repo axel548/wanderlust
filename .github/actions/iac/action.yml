@@ -23,9 +23,11 @@ runs:
       run: |
         mkdir -p ~/.aws
         cp .aws/config.example ~/.aws/config
-        cp .aws/credentials.example ~/.aws/credentials
-        sed -i "s/<AWS_ACCESS_KEY_ID>/${{ inputs.aws_id }}/" ~/.aws/credentials
-        sed -i "s/<AWS_SECRET_ACCESS_KEY>/${{ inputs.aws_key }}/" ~/.aws/credentials
+        touch  ~/.aws/credentials
+       
+        cat "[default]" >> ~/.aws/credentials
+        cat "aws_access_key_id = ${{ inputs.aws_id }}" >> ~/.aws/credentials
+        cat "aws_secret_access_key = ${{ inputs.aws_key }}" >> ~/.aws/credentials
       shell: bash
 
     - name: Set up Terraform
