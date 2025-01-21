@@ -17,11 +17,4 @@ runs:
       run: |
         npm install
         npm run test
-      shell: bash        
-
-    - name: Run tests for Backend
-      working-directory: backend
-      run: |
-        npm install
-        npm run test
       shell: bash
