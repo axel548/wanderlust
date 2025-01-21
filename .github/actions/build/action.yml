@@ -14,11 +14,12 @@ runs:
     steps:
       - name: Set environment variables
         run: |
-          echo "REGISTRY=axe548/wanderlustdevops" >> $GITHUB_ENV
           echo "IMAGE_NAME_FRONTEND=wanderlust_frontend" >> $GITHUB_ENV
           echo "IMAGE_NAME_FRONTEND_VERSION=wanderlust_frontend-v1.0.1" >> $GITHUB_ENV
+          echo "IMAGE_NAME_FRONTEND_VERSION=axe548/wanderlustdevops:wanderlust_frontend-v1.0.1" >> $GITHUB_ENV
           echo "IMAGE_NAME_BACKEND=wanderlust_backend" >> $GITHUB_ENV
           echo "IMAGE_NAME_BACKEND_VERSION=wanderlust_backend-v1.0.1" >> $GITHUB_ENV
+          echo "IMAGE_NAME_BACKEND_VERSION=axe548/wanderlustdevops:wanderlust_backend-v1.0.1" >> $GITHUB_ENV
         shell: bash
 
       - name: Check out the repo
@@ -39,7 +40,7 @@ runs:
         shell: bash
 
       - name: FRONTEND - Push Docker image to Docker Hub
-        run: docker push ${{ env.REGISTRY }}:${{ env.IMAGE_NAME_FRONTEND_VERSION }}
+        run: docker push ${{ env.IMAGE_NAME_FRONTEND_VERSION }}
         shell: bash
 
       - name: BACKEND - Build the Docker image
@@ -51,5 +52,5 @@ runs:
         shell: bash
 
       - name: BACKEND - Push Docker image to Docker Hub
-        run: docker push ${{ env.REGISTRY }}:${{ env.IMAGE_NAME_BACKEND_VERSION }}
+        run: docker push ${{ env.IMAGE_NAME_BACKEND_VERSION }}
         shell: bash
