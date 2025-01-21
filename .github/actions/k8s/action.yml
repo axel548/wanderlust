@@ -48,19 +48,15 @@ runs:
             google_client_id='googleclientid-secret'
             google_client_secret='googleclientsecret-secret'
 
-            # kubectl delete secret mongodb-secret -n wanderlustdevops
-            echo $JWTSECRET > ./$jwt_name.txt
-            echo $MONGODBSECRET > ./$db_uri.txt
-            echo $GOOGLECLIENTID > ./$google_client_id.txt
-            echo $GOOGLECLIENTSECRET > ./$google_client_secret.txt
+            echo ${{ inputs.jwt_name }} > ./$jwt_name.txt
+            echo ${{ inputs.db_uri }} > ./$db_uri.txt
+            echo ${{ inputs.google_client_id }} > ./$google_client_id.txt
+            echo ${{ inputs.jwt_name }} > ./$google_client_secret.txt
 
-            kubectl create secret generic $jwt_name --from-file=./$jwt_name.txt  -n $eks_namespace
-            kubectl create secret generic $db_uri --from-file=./$db_uri.txt -n $eks_namespace
-            kubectl create secret generic $google_client_id --from-file=./$google_client_id.txt  -n $eks_namespace
-            kubectl create secret generic $google_client_secret --from-file=./$google_client_secret.txt -n $eks_namespace
-
-            kubectl get secrets -n $eks_namespace
-
+            kubectl create secret generic $jwt_name --from-file=./$jwt_name.txt  -n wanderlustdevops
+            kubectl create secret generic $db_uri --from-file=./$db_uri.txt -n wanderlustdevops
+            kubectl create secret generic $google_client_id --from-file=./$google_client_id.txt  -n wanderlustdevops
+            kubectl create secret generic $google_client_secret --from-file=./$google_client_secret.txt -n wanderlustdevops
 
         kubectl apply -f k8s/deployments/
         kubectl apply -f k8s/services/
