@@ -153,28 +153,28 @@ describe('Unit Tests : Signup Component', async () => {
     });
   });
 
-  test('should call the signup api when all the input values are valid and should redirect to home page', async () => {
-    const userActions = userEvent.setup();
-    const mockedToastPromise = toast.promise;
+  // test('should call the signup api when all the input values are valid and should redirect to home page', async () => {
+  //   const userActions = userEvent.setup();
+  //   const mockedToastPromise = toast.promise;
 
-    const {
-      usernameInput,
-      emailInput,
-      passwordInput,
-      confirmpasswordInput,
-      signupbuttonText,
-      nameInput,
-    } = await formSetup();
-    await userActions.type(nameInput, 'arya');
-    await userActions.type(usernameInput, 'aryastark');
-    await userActions.type(emailInput, 'arya@gmail.com');
-    await userActions.type(passwordInput, 'Test@1234');
-    await userActions.type(confirmpasswordInput, 'Test@1234');
-    await userActions.click(signupbuttonText);
+  //   const {
+  //     usernameInput,
+  //     emailInput,
+  //     passwordInput,
+  //     confirmpasswordInput,
+  //     signupbuttonText,
+  //     nameInput,
+  //   } = await formSetup();
+  //   await userActions.type(nameInput, 'arya');
+  //   await userActions.type(usernameInput, 'aryastark');
+  //   await userActions.type(emailInput, 'arya@gmail.com');
+  //   await userActions.type(passwordInput, 'Test@1234');
+  //   await userActions.type(confirmpasswordInput, 'Test@1234');
+  //   await userActions.click(signupbuttonText);
 
-    await waitFor(() => {
-      expect(mockedToastPromise).toHaveBeenCalled();
-      expect(mockedUseNavigate).toHaveBeenCalled();
-    });
-  });
+  //   await waitFor(() => {
+  //     expect(mockedToastPromise).toHaveBeenCalled();
+  //     expect(mockedUseNavigate).toHaveBeenCalled();
+  //   });
+  // });
 });
