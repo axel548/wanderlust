@@ -42,12 +42,16 @@ runs:
       run: |
         kubectl apply -f k8s/namespace.yaml
         kubectl apply -f k8s/configmap.yaml
-
+            rm 
             jwt_name='jwt-secret'
             db_uri='mongodb-secret'
             google_client_id='googleclientid-secret'
             google_client_secret='googleclientsecret-secret'
 
+            rm ./$jwt_name.txt
+            rm ./$db_uri.txt
+            rm ./$google_client_id.txt
+            rm ./$google_client_secret.txt
             echo ${{ inputs.jwt_name }} > ./$jwt_name.txt
             echo ${{ inputs.db_uri }} > ./$db_uri.txt
             echo ${{ inputs.google_client_id }} > ./$google_client_id.txt
